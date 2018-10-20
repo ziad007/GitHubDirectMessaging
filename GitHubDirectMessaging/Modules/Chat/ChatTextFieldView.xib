@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="S2h-82-IHZ" customClass="ChatTextFieldView" customModule="GitHubDirectMessaging" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b3M-fX-8Yc">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4cj-EQ-AZR">
+                            <rect key="frame" x="16" y="10" width="343" height="50"/>
+                            <subviews>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uie-wl-Zup">
+                                    <rect key="frame" x="0.0" y="0.0" width="294" height="50"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SsY-0O-QUc">
+                                    <rect key="frame" x="299" y="0.0" width="44" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="44" id="UhE-ED-2gk"/>
+                                    </constraints>
+                                    <state key="normal" title="Send"/>
+                                    <connections>
+                                        <action selector="didSelectSend:" destination="S2h-82-IHZ" eventType="touchUpInside" id="paF-7w-3KL"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="4cj-EQ-AZR" firstAttribute="top" secondItem="b3M-fX-8Yc" secondAttribute="top" constant="10" id="65t-av-DA8"/>
+                        <constraint firstAttribute="trailing" secondItem="4cj-EQ-AZR" secondAttribute="trailing" constant="16" id="GdG-Y4-GYB"/>
+                        <constraint firstAttribute="bottom" secondItem="4cj-EQ-AZR" secondAttribute="bottom" constant="10" id="NAN-HQ-SE9"/>
+                        <constraint firstItem="4cj-EQ-AZR" firstAttribute="leading" secondItem="b3M-fX-8Yc" secondAttribute="leading" constant="16" id="Xox-Jw-k6c"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="b3M-fX-8Yc" firstAttribute="trailing" secondItem="Bn4-0j-ftN" secondAttribute="trailing" id="04u-8c-eg3"/>
+                <constraint firstItem="b3M-fX-8Yc" firstAttribute="top" secondItem="Bn4-0j-ftN" secondAttribute="top" id="UYm-Ca-muH"/>
+                <constraint firstItem="b3M-fX-8Yc" firstAttribute="bottom" secondItem="Bn4-0j-ftN" secondAttribute="bottom" id="biu-Hm-fIJ"/>
+                <constraint firstItem="b3M-fX-8Yc" firstAttribute="leading" secondItem="Bn4-0j-ftN" secondAttribute="leading" id="jzp-md-r7v"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Bn4-0j-ftN"/>
+            <connections>
+                <outlet property="messageTextView" destination="Uie-wl-Zup" id="kkh-QE-ikf"/>
+            </connections>
+            <point key="canvasLocation" x="184.80000000000001" y="-303.14842578710648"/>
+        </view>
+    </objects>
+</document>

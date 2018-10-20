@@ -98,6 +98,11 @@ extension UserListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
+        let user = usersListInteractor.usersResponse?.values[indexPath.row]
+
+        if let userID = user?.id{
+            self.navigationController?.pushViewController(ChatViewController(userID: userID), animated: true)
+        }
     }
 }
 
