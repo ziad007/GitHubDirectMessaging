@@ -49,6 +49,7 @@ class APICall {
     func sendRequest<T: RequestApi>(
         _ API: T,
         handler: @escaping (response) -> Void)  {
+        print(API.completeURLString)
 
         guard let url = URL(string: API.completeURLString) else { return }
         var urlRequest = URLRequest(url: url)

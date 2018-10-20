@@ -31,20 +31,20 @@ final class UsersListInteractor: UsersListInteractorInputs, UsersListInteractorO
     }
 
     func fetchUsers() {
-       /* if let previousResult = usersResponse {
-            photoService.fetchNextRecentPhotos(pagedPhotos: previousResult) { [weak self] (response) in
+        if let previousResult = usersResponse {
+            usersService.fetchNextUsers(pagedUsers: previousResult) { [weak self] (response) in
                 guard let localSelf = self else { return }
                 switch response {
                 case .success(let response):
                     if let response = response {
-                        localSelf.photosResponse = localSelf.appendData(for: previousResult, nextPhotosReponse: response)
-                        localSelf.requestloadPhotosCompleteHandler?()
+                        localSelf.usersResponse = response
+                        localSelf.requestloadUsersCompleteHandler?()
                     }
-                case .failure(let error):
-                    localSelf.controller?.showErrorAlert(error)
+                case .failure(_): break
+                    //localSelf.controller?.showErrorAlert(error)
                 }
             }
-        } else {*/
+        } else {
             usersService.getUsers(lastUserID: 0) { [weak self] (response) in
                 guard let localSelf = self else { return }
                 switch response {
@@ -56,6 +56,7 @@ final class UsersListInteractor: UsersListInteractorInputs, UsersListInteractorO
                 }
             }
         }
+    }
 
 
   /*  private func appendData(for previousPhotosResponse: PagedPhotos, nextPhotosReponse: PagedPhotos) -> PagedPhotos {

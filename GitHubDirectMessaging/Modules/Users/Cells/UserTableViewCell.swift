@@ -7,19 +7,21 @@ final class UserTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.spacing = 5
+        stackView.spacing = 15
+        stackView.alignment = .center
         return stackView
     }()
 
     private let userAvatarImageView: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
     private let userNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -34,8 +36,8 @@ final class UserTableViewCell: UITableViewCell {
     }
 
     private func commonInit() {
-       // contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //frame = CGRect(origin: CGPoint.zero, size: CGSize(width: 999, height: 999))
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        frame = CGRect(origin: CGPoint.zero, size: CGSize(width: 999, height: 999))
 
         rootStackView.addArrangedSubview(userAvatarImageView)
         rootStackView.addArrangedSubview(userNameLabel)
@@ -47,13 +49,12 @@ final class UserTableViewCell: UITableViewCell {
     private func layoutComponents() {
         NSLayoutConstraint.activate([
             rootStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            rootStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: 5),
+            rootStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -5),
             rootStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             rootStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-            userAvatarImageView.widthAnchor.constraint(equalToConstant: 40),
-            userAvatarImageView.heightAnchor.constraint(equalToConstant: 40)
-
+            userAvatarImageView.widthAnchor.constraint(equalToConstant: 50),
+            userAvatarImageView.heightAnchor.constraint(equalToConstant: 50)
             ])
     }
 

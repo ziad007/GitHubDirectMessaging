@@ -3,8 +3,9 @@ import UIKit
 
 final class UserListViewController: UIViewController {
 
-    static let height: CGFloat = 100
+    static let height: CGFloat = 70
     static let cellIdentifier = "UserTableViewCell"
+    fileprivate var isLoading = false
 
     fileprivate let usersListInteractor: UsersListInteractor
 
@@ -65,12 +66,14 @@ final class UserListViewController: UIViewController {
     }
 
     private func fetchData() {
+        isLoading = true
         usersListInteractor.fetchUsers()
     }
 
     private func setupLoadCompletion() {
         usersListInteractor.requestloadUsersCompleteHandler = { [weak self] () in
             guard let localSelf = self else { return }
+            localSelf.isLoading = false
             localSelf.tableView.reloadData()
         }
     }
@@ -105,4 +108,17 @@ extension UserListViewController: UITableViewDelegate {
         }
     }
 }
+
+extension UserListViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height ) > scrollView.contentSize.height)
+            && isLoading == false {
+            isLoading = true
+            usersListInteractor.fetchUsers()
+        }
+    }
+}
+
+
 

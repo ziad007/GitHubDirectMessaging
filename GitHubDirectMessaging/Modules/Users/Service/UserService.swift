@@ -5,7 +5,7 @@ typealias UsersResponse = (Result<PagedUsers?, NSError>) -> Void
 
 protocol UserServiceProtocol {
     func getUsers(lastUserID: Int, completionHandler: @escaping UsersResponse)
-   // func fetchNextRecentPhotos(pagedPhotos: PagedPhotos, completionHandler: @escaping PhotoResponse)
+    func fetchNextUsers(pagedUsers: PagedUsers, completionHandler: @escaping UsersResponse)
 }
 
 
@@ -31,17 +31,18 @@ final class UserService: UserServiceProtocol {
         }
     }
 
-   /* func fetchNextRecentPhotos(pagedPhotos: PagedPhotos, completionHandler: @escaping PhotoResponse) {
-        getRecentPhotos(page: pagedPhotos.nextPage) {
-            response in
+    func fetchNextUsers(pagedUsers: PagedUsers, completionHandler: @escaping UsersResponse) {
+        getUsers(lastUserID: pagedUsers.lastUserSeenUserID) { response in
             switch(response) {
             case .success(let response):
                 if let response = response {
-                    completionHandler(Result.success(response))
+                    var mutable = pagedUsers
+                    mutable.values.append(contentsOf: response.values)
+                    completionHandler(Result.success(mutable))
                 }
             case .failure(let error):
                 completionHandler(Result.failure(error as NSError))
             }
         }
-    }*/
+    }
 }
