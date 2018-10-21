@@ -104,7 +104,7 @@ final class ChatViewController: UIViewController {
         if messageCount > 0 {
             let lastRowIndex = messageCount - 1
             let pathToLastRow = NSIndexPath(row: lastRowIndex, section: 0)
-            tableView.scrollToRow(at: pathToLastRow as IndexPath, at: .bottom, animated: true)
+            tableView.scrollToRow(at: pathToLastRow as IndexPath, at: .bottom, animated: false)
         }
 
     }

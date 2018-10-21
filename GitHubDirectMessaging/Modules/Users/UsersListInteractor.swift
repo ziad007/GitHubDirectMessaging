@@ -57,13 +57,4 @@ final class UsersListInteractor: UsersListInteractorInputs, UsersListInteractorO
             }
         }
     }
-
-
-  /*  private func appendData(for previousPhotosResponse: PagedPhotos, nextPhotosReponse: PagedPhotos) -> PagedPhotos {
-        var newPhotosReponse = nextPhotosReponse
-        var photos = previousPhotosResponse.values
-        photos.append(contentsOf: nextPhotosReponse.values)
-        newPhotosReponse.values = photos
-        return newPhotosReponse
-    }*/
 }

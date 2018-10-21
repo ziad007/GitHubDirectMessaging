@@ -65,7 +65,7 @@ final class UserListViewController: UIViewController {
             ])
     }
 
-    private func fetchData() {
+    fileprivate func fetchData() {
         isLoading = true
         usersListInteractor.fetchUsers()
     }
@@ -114,8 +114,7 @@ extension UserListViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if ((scrollView.contentOffset.y + scrollView.frame.size.height ) > scrollView.contentSize.height)
             && isLoading == false {
-            isLoading = true
-            usersListInteractor.fetchUsers()
+            fetchData()
         }
     }
 }
