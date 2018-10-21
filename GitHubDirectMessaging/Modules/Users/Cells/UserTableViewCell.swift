@@ -12,10 +12,11 @@ final class UserTableViewCell: UITableViewCell {
         return stackView
     }()
 
-    private let userAvatarImageView: UIImageView = {
+    let userAvatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "avatar")
         return imageView
     }()
 
@@ -63,10 +64,11 @@ final class UserTableViewCell: UITableViewCell {
         guard let user = user  else {
             return
         }
-        userAvatarImageView.image = nil
+        //userAvatarImageView.image = nil
+
         userNameLabel.text = user.login
-        if let urlString = user.avatarUrl, let url = URL(string: urlString) {
-            userAvatarImageView.downloadedFrom(url: url)
-        }
+       // if let urlString = user.avatarUrl, let url = URL(string: urlString) {
+         //   userAvatarImageView.downloadedFrom(url: url)
+        //}
     }
 }

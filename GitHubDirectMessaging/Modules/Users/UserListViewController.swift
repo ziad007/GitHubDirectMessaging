@@ -5,8 +5,9 @@ final class UserListViewController: UIViewController {
 
     static let height: CGFloat = 70
     static let cellIdentifier = "UserTableViewCell"
-    fileprivate var isLoading = false
 
+    fileprivate var isLoading = false
+    fileprivate var userImagesCache = [String: UIImage]()
     fileprivate let usersListInteractor: UsersListInteractor
 
     fileprivate lazy var tableView: UITableView = {
@@ -20,6 +21,7 @@ final class UserListViewController: UIViewController {
         usersListInteractor = UsersListInteractor()
 
         super.init(nibName: nil, bundle: nil)
+
         usersListInteractor.controller = self
     }
 
@@ -31,8 +33,8 @@ final class UserListViewController: UIViewController {
         super.viewDidLoad()
 
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserListViewController.cellIdentifier)
-        tableView.tableFooterView = UIView()
 
+        tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -44,13 +46,17 @@ final class UserListViewController: UIViewController {
         fetchData()
     }
 
-    private func setupNavigationItem() {
-        navigationItem.title = "Users"
-        navigationController?.navigationBar.barTintColor = UIColor.white
-      //  navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
-        self.navigationController?.navigationBar.tintColor = .green
+    func showErrorAlert(message: String) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+        alertController.addAction(dismissAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 
+    private func setupNavigationItem() {
+        navigationItem.title = "GitHub DM"
+        navigationController?.navigationBar.barTintColor = UIColor.white
+    }
 
     private func addComponents() {
         view.addSubview(tableView)
@@ -80,7 +86,6 @@ final class UserListViewController: UIViewController {
 }
 
 extension UserListViewController: UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UserListViewController.height
     }
@@ -91,20 +96,40 @@ extension UserListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UserListViewController.cellIdentifier) as! UserTableViewCell
+        cell.accessoryType = .disclosureIndicator
+
         let user = usersListInteractor.usersResponse?.values[indexPath.row]
         cell.configure(user: user)
+        cell.tag = indexPath.row
+        cell.userAvatarImageView.image = UIImage(named: "avatar")
+
+        if let urlString = user?.avatarUrl, let url = URL(string: urlString) {
+            if let img = userImagesCache[urlString] {
+                cell.userAvatarImageView.image = img
+            } else {
+                let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                    guard let data = data, error == nil else { return }
+                    DispatchQueue.main.async() {
+                        if cell.tag == indexPath.row {
+                            let imageData = UIImage(data: data)
+                            self.userImagesCache[urlString] = imageData
+                            cell.userAvatarImageView.image = imageData
+                }
+            }
+        }
+                task.resume()
+            }
+
+        }
         return cell
     }
 }
 
 extension UserListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
-        let user = usersListInteractor.usersResponse?.values[indexPath.row]
-
-        if let userID = user?.id{
-            self.navigationController?.pushViewController(ChatViewController(userID: userID), animated: true)
+        if let user = usersListInteractor.usersResponse?.values[indexPath.row] {
+            self.navigationController?.pushViewController(ChatViewController(user: user), animated: true)
         }
     }
 }
@@ -118,6 +143,3 @@ extension UserListViewController: UIScrollViewDelegate {
         }
     }
 }
-
-
-

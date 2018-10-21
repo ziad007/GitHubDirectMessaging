@@ -8,8 +8,7 @@ protocol UserServiceProtocol {
     func fetchNextUsers(pagedUsers: PagedUsers, completionHandler: @escaping UsersResponse)
 }
 
-
-final class UserService: UserServiceProtocol {
+final class UsersService: UserServiceProtocol {
 
     let apiCall: APICall
 

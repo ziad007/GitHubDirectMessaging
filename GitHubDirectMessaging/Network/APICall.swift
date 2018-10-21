@@ -4,7 +4,6 @@ import Foundation
 let SharedAPICall = APICall()
 typealias response = Result<Any?, NSError>
 
-
 let baseURLString = "https://api.github.com"
 
 protocol RequestApi {
@@ -56,10 +55,12 @@ class APICall {
         urlRequest.httpMethod = API.akmethod.description
 
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-
-            if let error = error {
-                DispatchQueue.main.async {
-                    handler(Result.failure(error as NSError))
+            if error != nil {
+                if let httpResponse = response as? HTTPURLResponse {
+                    let responseError = ErrorCodes(code: httpResponse.statusCode)
+                    DispatchQueue.main.async {
+                        handler(Result.failure((responseError?.error)!))
+                    }
                 }
                 return
             }

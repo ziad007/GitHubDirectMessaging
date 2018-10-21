@@ -1,15 +1,12 @@
 
 import Foundation
 
- struct PagedUsers {
-
+struct PagedUsers {
     var values = [User]()
 
     var lastUserSeenUserID: Int {
         return values.last?.id ?? 0
     }
-
-    init() {}
 
     init(usersDictionaries: [NSDictionary]) {
         self.values = usersDictionaries.compactMap { userDictionary in

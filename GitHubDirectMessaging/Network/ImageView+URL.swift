@@ -2,7 +2,6 @@
 import Foundation
 import UIKit
 
-
 extension UIImageView {
     func downloadedFrom(url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
         contentMode = mode

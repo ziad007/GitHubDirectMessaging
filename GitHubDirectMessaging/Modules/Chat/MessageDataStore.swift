@@ -13,7 +13,7 @@ class MessageDataStore {
 
      func getMessages(for dialogID: String) -> [Message] {
         var messages = [Message]()
-        if let data =  UserDefaults.standard.data(forKey: dialogID){
+        if let data = UserDefaults.standard.data(forKey: dialogID){
             do {
                 if let messagesDecoded = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Message] {
                    messages = messagesDecoded

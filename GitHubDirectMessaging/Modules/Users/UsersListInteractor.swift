@@ -20,14 +20,16 @@ final class UsersListInteractor: UsersListInteractorInputs, UsersListInteractorO
     var usersService: UserServiceProtocol
     weak var controller: UserListViewController?
     var usersResponse: PagedUsers?
+    var needToFetchNext: Bool = true
     var requestloadUsersCompleteHandler: (() -> Void)?
 
     var numberOfItems: Int {
         return usersResponse?.values.count ?? 0
     }
 
+
     init() {
-        usersService = UserService()
+        usersService = UsersService()
     }
 
     func fetchUsers() {
@@ -40,8 +42,8 @@ final class UsersListInteractor: UsersListInteractorInputs, UsersListInteractorO
                         localSelf.usersResponse = response
                         localSelf.requestloadUsersCompleteHandler?()
                     }
-                case .failure(_): break
-                    //localSelf.controller?.showErrorAlert(error)
+                case .failure(let error):
+                 localSelf.controller?.showErrorAlert(message: error.description)
                 }
             }
         } else {
@@ -51,8 +53,8 @@ final class UsersListInteractor: UsersListInteractorInputs, UsersListInteractorO
                 case .success(let response):
                     localSelf.usersResponse = response
                     localSelf.requestloadUsersCompleteHandler?()
-                case .failure(let error): break
-                    //localSelf.controller?.showErrorAlert(error)
+                case .failure(let error):
+                    localSelf.controller?.showErrorAlert(message: error.description)
                 }
             }
         }

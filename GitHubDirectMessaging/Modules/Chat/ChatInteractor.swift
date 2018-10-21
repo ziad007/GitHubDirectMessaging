@@ -21,8 +21,9 @@ final class ChatInteractor: ChatInteractorInputs, ChatInteractorOutputs {
     var chatService: ChatService
     weak var controller: ChatViewController?
     var messagesResponse: PagedMessages?
-    var requestloadUsersCompleteHandler: (() -> Void)?
+    var requestloadMessagesCompleteHandler: (() -> Void)?
     var userID: Int
+
     var numberOfItems: Int {
         return messagesResponse?.values?.count ?? 0
     }
@@ -30,6 +31,9 @@ final class ChatInteractor: ChatInteractorInputs, ChatInteractorOutputs {
     init(userID: Int) {
         self.userID = userID
         chatService = ChatService(dialogID: String(self.userID))
+
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveMessage(_:)), name:
+            NSNotification.Name(rawValue: "didReceiveData"), object: nil)
     }
 
     func saveMessage(body: String) {
@@ -39,37 +43,13 @@ final class ChatInteractor: ChatInteractorInputs, ChatInteractorOutputs {
 
             switch response {
             case .success(_):
-
-                var messages =   localSelf.messagesResponse?.values ?? []
+                var messages = localSelf.messagesResponse?.values ?? []
                 messages.append(message)
                 localSelf.messagesResponse?.values = messages
-                let receiveMessage = body + " " + body
-                localSelf.receiveMessage(body: receiveMessage)
-                localSelf.requestloadUsersCompleteHandler?()
+                localSelf.requestloadMessagesCompleteHandler?()
             case .failure(_): break
-
-                }
-        }
-    }
-
-    func receiveMessage(body: String) {
-        let message = Message(body: body, isMine: false, postDate: Date())
-        chatService.saveMessage(message: message) { [weak self] (response) in
-            guard let localSelf = self else { return }
-
-            switch response {
-            case .success(_):
-
-                var messages =   localSelf.messagesResponse?.values ?? []
-                messages.append(message)
-                localSelf.messagesResponse?.values = messages
-                localSelf.requestloadUsersCompleteHandler?()
-            case .failure(_): break
-
             }
         }
-
-
     }
 
     func fetchMessages() {
@@ -79,46 +59,30 @@ final class ChatInteractor: ChatInteractorInputs, ChatInteractorOutputs {
             switch response {
             case .success(let result):
                 localSelf.messagesResponse = result
-                localSelf.requestloadUsersCompleteHandler?()
+                localSelf.requestloadMessagesCompleteHandler?()
             case .failure(_): break
-
             }
         }
     }
-}
 
+    @objc func onDidReceiveMessage(_ notification: Notification) {
+        if let message = notification.object as? Message {
+            chatService.saveMessage(message: message) { [weak self] (response) in
+                guard let localSelf = self else { return }
 
-        /* if let previousResult = usersResponse {
-         photoService.fetchNextRecentPhotos(pagedPhotos: previousResult) { [weak self] (response) in
-         guard let localSelf = self else { return }
-         switch response {
-         case .success(let response):
-         if let response = response {
-         localSelf.photosResponse = localSelf.appendData(for: previousResult, nextPhotosReponse: response)
-         localSelf.requestloadPhotosCompleteHandler?()
-         }
-         case .failure(let error):
-         localSelf.controller?.showErrorAlert(error)
-         }
-         }
-         } else {*/
-       /* usersService.getUsers(lastUserID: 0) { [weak self] (response) in
-            guard let localSelf = self else { return }
-            switch response {
-            case .success(let response):
-                localSelf.usersResponse = response
-                localSelf.requestloadUsersCompleteHandler?()
-            case .failure(let error): break
-                //localSelf.controller?.showErrorAlert(error)
+                switch response {
+                case .success(_):
+                    var messages =  localSelf.messagesResponse?.values ?? []
+                    messages.append(message)
+                    localSelf.messagesResponse?.values = messages
+                    localSelf.requestloadMessagesCompleteHandler?()
+                case .failure(_): break
+                }
             }
-        }*/
-   // }
+        }
+    }
 
-
-    /*  private func appendData(for previousPhotosResponse: PagedPhotos, nextPhotosReponse: PagedPhotos) -> PagedPhotos {
-     var newPhotosReponse = nextPhotosReponse
-     var photos = previousPhotosResponse.values
-     photos.append(contentsOf: nextPhotosReponse.values)
-     newPhotosReponse.values = photos
-     return newPhotosReponse
-*/
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+}

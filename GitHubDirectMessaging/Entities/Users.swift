@@ -2,8 +2,7 @@
 import Foundation
 
 struct User {
-
-    var id: Int?
+    var id: Int
     var login: String?
     var avatarUrl: String?
     var type: String?
@@ -15,7 +14,7 @@ extension User {
         guard let id = json["id"] as? Int, let login = json["login"] as? String else { return nil }
 
         self.id = id
-        self.login = login
+        self.login = "@\(login)"
 
         if let avatarUrl = json["avatar_url"] as? String {
             self.avatarUrl = avatarUrl

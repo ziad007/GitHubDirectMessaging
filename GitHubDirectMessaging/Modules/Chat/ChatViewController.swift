@@ -3,17 +3,22 @@ import UIKit
 
 final class ChatViewController: UIViewController {
 
-
-    private var userID: Int
+    private var user: User
     static let height: CGFloat = 100
-    static let cellIdentifier = "MessageMineTableViewCell"
+    static let mineCellIdentifier = "MessageMineTableViewCell"
+    static let otherCellIdentifier = "MessageOtherTableViewCell"
 
     fileprivate let chatInteractor: ChatInteractor
+    fileprivate lazy var keyboardHC: NSLayoutConstraint = {
+        return self.chatView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+    }()
 
     fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .white
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+        tableView.separatorStyle = .none
         return tableView
     }()
 
@@ -24,12 +29,11 @@ final class ChatViewController: UIViewController {
         return chatView
     }()
 
-    init(userID: Int) {
-        self.userID = userID
-        chatInteractor = ChatInteractor(userID: userID)
+    init(user: User) {
+        self.user = user
+        chatInteractor = ChatInteractor(userID: user.id)
 
         super.init(nibName: nil, bundle: nil)
-
 
         chatInteractor.controller = self
     }
@@ -40,8 +44,20 @@ final class ChatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
 
-        tableView.register(MessageMineTableViewCell.self, forCellReuseIdentifier: ChatViewController.cellIdentifier)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillShow(notification:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillHide(notification:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+
+        tableView.register(MessageMineTableViewCell.self, forCellReuseIdentifier: ChatViewController.mineCellIdentifier)
+           tableView.register(MessageOtherTableViewCell.self, forCellReuseIdentifier: ChatViewController.otherCellIdentifier)
         tableView.tableFooterView = UIView()
 
         tableView.dataSource = self
@@ -55,12 +71,9 @@ final class ChatViewController: UIViewController {
     }
 
     private func setupNavigationItem() {
-        navigationItem.title = "Messages"
+        navigationItem.title = user.login
         navigationController?.navigationBar.barTintColor = UIColor.white
-        //  navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.gray]
-        self.navigationController?.navigationBar.tintColor = .green
     }
-
 
     private func addComponents() {
         view.addSubview(tableView)
@@ -70,15 +83,14 @@ final class ChatViewController: UIViewController {
     private func layoutComponents() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
-           tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
             chatView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-            chatView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            keyboardHC,
             chatView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             chatView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
-            chatView.heightAnchor.constraint(equalToConstant: 90)
             ])
     }
 
@@ -87,9 +99,8 @@ final class ChatViewController: UIViewController {
     }
 
     private func setupLoadCompletion() {
-        chatInteractor.requestloadUsersCompleteHandler = { [weak self] () in
+        chatInteractor.requestloadMessagesCompleteHandler = { [weak self] () in
             guard let localSelf = self else { return }
-
             
             DispatchQueue.main.async {
                 localSelf.tableView.reloadData()
@@ -108,33 +119,54 @@ final class ChatViewController: UIViewController {
         }
 
     }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        let userInfo = notification.userInfo
+        let keyboardFrame = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        keyboardHC.constant = -keyboardFrame.size.height
+        let duration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+
+        UIView.animate(withDuration: duration as! TimeInterval, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let userInfo = notification.userInfo
+        keyboardHC.constant = 0
+        let duration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+
+        UIView.animate(withDuration: duration as! TimeInterval, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
 }
 
 extension ChatViewController: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UserListViewController.height
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatInteractor.messagesResponse?.values?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ChatViewController.cellIdentifier) as! MessageMineTableViewCell
+        guard let messages = chatInteractor.messagesResponse?.values else { fatalError() }
 
-        if let messages = chatInteractor.messagesResponse?.values {
-            let message = messages[indexPath.row]
-            cell.configure(message: message)
-        }
-
-        return cell
+        let message = messages[indexPath.row]
+        if message.isMine {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ChatViewController.mineCellIdentifier) as! MessageMineTableViewCell
+                cell.configure(message: message)
+                return cell
+            } else {
+                 let cell = tableView.dequeueReusableCell(withIdentifier: ChatViewController.otherCellIdentifier) as! MessageOtherTableViewCell
+                cell.configure(message: message)
+                return cell
+            }
     }
 }
 
 extension ChatViewController: ChatTextFieldViewDelegate {
     func sendButtonDidTap(body: String) {
-        chatInteractor.saveMessage(body: body)
+       chatInteractor.saveMessage(body: body)
     }
 }
 

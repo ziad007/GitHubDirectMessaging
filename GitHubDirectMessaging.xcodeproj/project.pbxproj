@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F72AB9DC217D12B0004480ED /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72AB9DB217D12B0004480ED /* Errors.swift */; };
 		F737C4CD2177A823006E1E13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C4CC2177A823006E1E13 /* AppDelegate.swift */; };
 		F737C4CF2177A823006E1E13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C4CE2177A823006E1E13 /* ViewController.swift */; };
 		F737C4D22177A823006E1E13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F737C4D02177A823006E1E13 /* Main.storyboard */; };
@@ -19,11 +20,10 @@
 		F737C4F72177A89F006E1E13 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C4F62177A89F006E1E13 /* GlobalFunctions.swift */; };
 		F737C4FA2177A8AB006E1E13 /* PagedUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C4F82177A8AB006E1E13 /* PagedUsers.swift */; };
 		F737C4FB2177A8AB006E1E13 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C4F92177A8AB006E1E13 /* Users.swift */; };
-		F737C4FE2177B4FA006E1E13 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C4FD2177B4FA006E1E13 /* UserService.swift */; };
+		F737C4FE2177B4FA006E1E13 /* UsersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C4FD2177B4FA006E1E13 /* UsersService.swift */; };
 		F737C5012177BE53006E1E13 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C4FF2177BE53006E1E13 /* UserListViewController.swift */; };
 		F737C5022177BE53006E1E13 /* UsersListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C5002177BE53006E1E13 /* UsersListInteractor.swift */; };
 		F737C5042177C39B006E1E13 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C5032177C39B006E1E13 /* UserTableViewCell.swift */; };
-		F737C5062177C6D3006E1E13 /* ImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C5052177C6D3006E1E13 /* ImageView+URL.swift */; };
 		F737C50D2177C710006E1E13 /* EmptyStateCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C5092177C710006E1E13 /* EmptyStateCollectionReusableView.swift */; };
 		F737C50E2177C710006E1E13 /* LoadingCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F737C50A2177C710006E1E13 /* LoadingCollectionReusableView.xib */; };
 		F737C50F2177C710006E1E13 /* LoadingCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C50B2177C710006E1E13 /* LoadingCollectionReusableView.swift */; };
@@ -37,6 +37,7 @@
 		F737C5232179239B006E1E13 /* ChatTextFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F737C5222179239B006E1E13 /* ChatTextFieldView.xib */; };
 		F737C52521792A03006E1E13 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C52421792A03006E1E13 /* ChatService.swift */; };
 		F737C529217B926C006E1E13 /* MessageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C528217B926C006E1E13 /* MessageDataStore.swift */; };
+		F737C52B217CC030006E1E13 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C52A217CC030006E1E13 /* MessageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F72AB9DB217D12B0004480ED /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		F737C4C92177A823006E1E13 /* GitHubDirectMessaging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubDirectMessaging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F737C4CC2177A823006E1E13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F737C4CE2177A823006E1E13 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,11 +68,10 @@
 		F737C4F62177A89F006E1E13 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		F737C4F82177A8AB006E1E13 /* PagedUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedUsers.swift; sourceTree = "<group>"; };
 		F737C4F92177A8AB006E1E13 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
-		F737C4FD2177B4FA006E1E13 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		F737C4FD2177B4FA006E1E13 /* UsersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersService.swift; sourceTree = "<group>"; };
 		F737C4FF2177BE53006E1E13 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		F737C5002177BE53006E1E13 /* UsersListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersListInteractor.swift; sourceTree = "<group>"; };
 		F737C5032177C39B006E1E13 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
-		F737C5052177C6D3006E1E13 /* ImageView+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageView+URL.swift"; sourceTree = "<group>"; };
 		F737C5092177C710006E1E13 /* EmptyStateCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateCollectionReusableView.swift; sourceTree = "<group>"; };
 		F737C50A2177C710006E1E13 /* LoadingCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCollectionReusableView.xib; sourceTree = "<group>"; };
 		F737C50B2177C710006E1E13 /* LoadingCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 		F737C5222179239B006E1E13 /* ChatTextFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTextFieldView.xib; sourceTree = "<group>"; };
 		F737C52421792A03006E1E13 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		F737C528217B926C006E1E13 /* MessageDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDataStore.swift; sourceTree = "<group>"; };
+		F737C52A217CC030006E1E13 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				F737C4F62177A89F006E1E13 /* GlobalFunctions.swift */,
+				F72AB9DB217D12B0004480ED /* Errors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -171,7 +174,6 @@
 		F737C4EE2177A870006E1E13 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				F737C5052177C6D3006E1E13 /* ImageView+URL.swift */,
 				F737C4EF2177A870006E1E13 /* Result.swift */,
 				F737C4F02177A870006E1E13 /* APICall.swift */,
 				F737C4F12177A870006E1E13 /* API */,
@@ -228,6 +230,7 @@
 				F737C5222179239B006E1E13 /* ChatTextFieldView.xib */,
 				F737C528217B926C006E1E13 /* MessageDataStore.swift */,
 				F737C52421792A03006E1E13 /* ChatService.swift */,
+				F737C52A217CC030006E1E13 /* MessageTableViewCell.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -235,7 +238,7 @@
 		F737C512217914CB006E1E13 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				F737C4FD2177B4FA006E1E13 /* UserService.swift */,
+				F737C4FD2177B4FA006E1E13 /* UsersService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -357,7 +360,7 @@
 				F737C51D2179181A006E1E13 /* ChatInteractor.swift in Sources */,
 				F737C515217914FE006E1E13 /* ChatViewController.swift in Sources */,
 				F737C51F217918A1006E1E13 /* PagesMessages.swift in Sources */,
-				F737C4FE2177B4FA006E1E13 /* UserService.swift in Sources */,
+				F737C4FE2177B4FA006E1E13 /* UsersService.swift in Sources */,
 				F737C50D2177C710006E1E13 /* EmptyStateCollectionReusableView.swift in Sources */,
 				F737C4CF2177A823006E1E13 /* ViewController.swift in Sources */,
 				F737C50F2177C710006E1E13 /* LoadingCollectionReusableView.swift in Sources */,
@@ -368,8 +371,9 @@
 				F737C4F72177A89F006E1E13 /* GlobalFunctions.swift in Sources */,
 				F737C51921791597006E1E13 /* MessageOtherTableViewCell.swift in Sources */,
 				F737C5022177BE53006E1E13 /* UsersListInteractor.swift in Sources */,
-				F737C5062177C6D3006E1E13 /* ImageView+URL.swift in Sources */,
+				F737C52B217CC030006E1E13 /* MessageTableViewCell.swift in Sources */,
 				F737C4F42177A870006E1E13 /* APICall.swift in Sources */,
+				F72AB9DC217D12B0004480ED /* Errors.swift in Sources */,
 				F737C51721791588006E1E13 /* MessageMineTableViewCell.swift in Sources */,
 				F737C52521792A03006E1E13 /* ChatService.swift in Sources */,
 				F737C4CD2177A823006E1E13 /* AppDelegate.swift in Sources */,

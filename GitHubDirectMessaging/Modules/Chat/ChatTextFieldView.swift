@@ -11,17 +11,19 @@ import UIKit
 
 protocol ChatTextFieldViewDelegate: class {
     func sendButtonDidTap(body: String)
-
 }
+
 class ChatTextFieldView: UIView {
 
     @IBOutlet weak var messageTextView: UITextView!
     weak var delegate: ChatTextFieldViewDelegate?
 
-
     @IBAction private func didSelectSend(_ sender: AnyObject) {
 
         guard let body = messageTextView.text else { return }
         delegate?.sendButtonDidTap(body: body)
+        messageTextView.text = ""
+        messageTextView.resignFirstResponder()
+
     }
 }
