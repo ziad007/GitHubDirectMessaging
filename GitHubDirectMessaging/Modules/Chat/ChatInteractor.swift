@@ -37,7 +37,7 @@ final class ChatInteractor: ChatInteractorInputs, ChatInteractorOutputs {
     }
 
     func saveMessage(body: String) {
-        let message = Message(body: body, isMine: true, postDate: Date())
+        let message = Message(body: body, isMine: true)
         chatService.saveMessage(message: message) { [weak self] (response) in
             guard let localSelf = self else { return }
 

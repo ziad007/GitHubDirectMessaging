@@ -169,4 +169,3 @@ extension ChatViewController: ChatTextFieldViewDelegate {
        chatInteractor.saveMessage(body: body)
     }
 }
-

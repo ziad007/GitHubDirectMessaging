@@ -19,11 +19,11 @@ class ChatTextFieldView: UIView {
     weak var delegate: ChatTextFieldViewDelegate?
 
     @IBAction private func didSelectSend(_ sender: AnyObject) {
-
+        guard  messageTextView.text != "" else { return }
         guard let body = messageTextView.text else { return }
+
         delegate?.sendButtonDidTap(body: body)
         messageTextView.text = ""
         messageTextView.resignFirstResponder()
-
     }
 }

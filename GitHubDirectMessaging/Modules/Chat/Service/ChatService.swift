@@ -12,6 +12,7 @@ protocol ChatServiceProtocol {
 final class ChatService: ChatServiceProtocol {
 
     let apiCall: APICall
+    let returnBackMessageDuration: TimeInterval = 1
     private let dialogID: String
 
     init(dialogID: String, apiCall: APICall = APICall()) {
@@ -30,9 +31,16 @@ final class ChatService: ChatServiceProtocol {
         completionHandler(Result.success(isSaved))
 
         if message.isMine {
-            let receivedMessageBody = message.body + " " + message.body
-            let receivedMessage = Message(body: receivedMessageBody, isMine: false, postDate: Date())
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didReceiveData"), object: receivedMessage)
+            DispatchQueue.main.asyncAfter(deadline: .now() + returnBackMessageDuration, execute: {
+                self.receiveRepeatedMessage(message: message)
+            })
+
         }
+    }
+
+    private func receiveRepeatedMessage(message: Message) {
+        let receivedMessageBody = message.body + " " + message.body
+        let receivedMessage = Message(body: receivedMessageBody, isMine: false)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didReceiveData"), object: receivedMessage)
     }
 }

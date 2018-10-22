@@ -27,7 +27,6 @@ final class UsersListInteractor: UsersListInteractorInputs, UsersListInteractorO
         return usersResponse?.values.count ?? 0
     }
 
-
     init() {
         usersService = UsersService()
     }
@@ -43,7 +42,7 @@ final class UsersListInteractor: UsersListInteractorInputs, UsersListInteractorO
                         localSelf.requestloadUsersCompleteHandler?()
                     }
                 case .failure(let error):
-                 localSelf.controller?.showErrorAlert(message: error.description)
+                 localSelf.controller?.showErrorAlert(message: error.domain)
                 }
             }
         } else {
@@ -54,7 +53,7 @@ final class UsersListInteractor: UsersListInteractorInputs, UsersListInteractorO
                     localSelf.usersResponse = response
                     localSelf.requestloadUsersCompleteHandler?()
                 case .failure(let error):
-                    localSelf.controller?.showErrorAlert(message: error.description)
+                    localSelf.controller?.showErrorAlert(message: error.domain)
                 }
             }
         }

@@ -9,7 +9,7 @@ enum ErrorCodes: Int {
         self.init(rawValue: code)
     }
 
-    var description: String {
+    var message: String {
         switch self {
 
         case .RateLimitExceeded:
@@ -20,6 +20,6 @@ enum ErrorCodes: Int {
     }
 
     var error: NSError {
-        return NSError(domain: description, code: self.rawValue, userInfo: nil)
+        return NSError(domain: message, code: self.rawValue, userInfo: nil)
     }
 }

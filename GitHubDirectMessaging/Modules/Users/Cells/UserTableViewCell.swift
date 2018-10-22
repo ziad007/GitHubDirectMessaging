@@ -60,15 +60,9 @@ final class UserTableViewCell: UITableViewCell {
     }
 
     func configure(user: User?) {
-
         guard let user = user  else {
             return
         }
-        //userAvatarImageView.image = nil
-
         userNameLabel.text = user.login
-       // if let urlString = user.avatarUrl, let url = URL(string: urlString) {
-         //   userAvatarImageView.downloadedFrom(url: url)
-        //}
     }
 }

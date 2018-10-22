@@ -16,9 +16,7 @@ class PagedMessages: NSObject, NSCoding {
     }
     struct PropertyKey {
         static let values = "values"
-      
     }
-
 
     //MARK: NSCoding
 
@@ -34,4 +32,3 @@ class PagedMessages: NSObject, NSCoding {
         self.init(values: values)
     }
 }
-
