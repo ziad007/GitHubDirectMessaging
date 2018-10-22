@@ -13,12 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        let vc = UserListViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        window?.rootViewController = nav
+        let userListViewVC = UserListViewController()
+        let navigationController = UINavigationController(rootViewController: userListViewVC)
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 
         // Override point for customization after application launch.

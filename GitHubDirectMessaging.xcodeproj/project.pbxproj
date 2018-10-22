@@ -101,7 +101,10 @@
 		F72AB9DD217E6767004480ED /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F737C4ED2177A870006E1E13 /* Entities */,
+				F737C4F92177A8AB006E1E13 /* Users.swift */,
+				F737C4F82177A8AB006E1E13 /* PagedUsers.swift */,
+				F737C51A21791668006E1E13 /* Message.swift */,
+				F737C51E217918A1006E1E13 /* PagesMessages.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -177,17 +180,6 @@
 				F72AB9DB217D12B0004480ED /* Errors.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		F737C4ED2177A870006E1E13 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				F737C4F82177A8AB006E1E13 /* PagedUsers.swift */,
-				F737C4F92177A8AB006E1E13 /* Users.swift */,
-				F737C51A21791668006E1E13 /* Message.swift */,
-				F737C51E217918A1006E1E13 /* PagesMessages.swift */,
-			);
-			path = Entities;
 			sourceTree = "<group>";
 		};
 		F737C4EE2177A870006E1E13 /* Network */ = {
