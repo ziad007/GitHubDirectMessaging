@@ -13,8 +13,8 @@ final class MessageMineTableViewCell: MessageTableViewCell {
 
    override func layoutComponents() {
         NSLayoutConstraint.activate([
-            textMessageLabel.topAnchor.constraint(equalTo: textView.topAnchor, constant: 16),
-            textView.bottomAnchor.constraint(equalTo: textMessageLabel.bottomAnchor,constant: 16),
+            textMessageLabel.topAnchor.constraint(equalTo: textView.topAnchor, constant: 20),
+            textView.bottomAnchor.constraint(equalTo: textMessageLabel.bottomAnchor,constant: 20),
             textView.trailingAnchor.constraint(equalTo: textMessageLabel.trailingAnchor, constant: 20),
             textMessageLabel.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 20),
 
