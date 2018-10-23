@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F72AB9DC217D12B0004480ED /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72AB9DB217D12B0004480ED /* Errors.swift */; };
+		F72AB9E1217FC04F004480ED /* Colors+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72AB9E0217FC04F004480ED /* Colors+utils.swift */; };
 		F737C4CD2177A823006E1E13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F737C4CC2177A823006E1E13 /* AppDelegate.swift */; };
 		F737C4D22177A823006E1E13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F737C4D02177A823006E1E13 /* Main.storyboard */; };
 		F737C4D42177A825006E1E13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F737C4D32177A825006E1E13 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		F72AB9DB217D12B0004480ED /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		F72AB9E0217FC04F004480ED /* Colors+utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+utils.swift"; sourceTree = "<group>"; };
 		F737C4C92177A823006E1E13 /* GitHubDirectMessaging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubDirectMessaging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F737C4CC2177A823006E1E13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F737C4D12177A823006E1E13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			children = (
 				F737C4F62177A89F006E1E13 /* GlobalFunctions.swift */,
 				F72AB9DB217D12B0004480ED /* Errors.swift */,
+				F72AB9E0217FC04F004480ED /* Colors+utils.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				F737C4FA2177A8AB006E1E13 /* PagedUsers.swift in Sources */,
 				F737C4F72177A89F006E1E13 /* GlobalFunctions.swift in Sources */,
 				F737C51921791597006E1E13 /* MessageOtherTableViewCell.swift in Sources */,
+				F72AB9E1217FC04F004480ED /* Colors+utils.swift in Sources */,
 				F737C5022177BE53006E1E13 /* UsersListInteractor.swift in Sources */,
 				F737C52B217CC030006E1E13 /* MessageTableViewCell.swift in Sources */,
 				F737C4F42177A870006E1E13 /* APICall.swift in Sources */,

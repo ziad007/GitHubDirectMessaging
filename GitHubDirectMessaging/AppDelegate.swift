@@ -20,9 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 
-        UINavigationBar.appearance().backgroundColor = UIColor.gray
+        UINavigationBar.appearance().backgroundColor = UIColor.appColor
 
-        // Override point for customization after application launch.
         return true
     }
 

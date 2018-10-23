@@ -46,6 +46,23 @@ final class ChatViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
+
+        tableView.register(MessageMineTableViewCell.self, forCellReuseIdentifier: ChatViewController.mineCellIdentifier)
+           tableView.register(MessageOtherTableViewCell.self, forCellReuseIdentifier: ChatViewController.otherCellIdentifier)
+        tableView.tableFooterView = UIView()
+
+        tableView.dataSource = self
+
+        registerNotifications()
+        setupNavigationItem()
+        addComponents()
+        layoutComponents()
+        setupLoadCompletion()
+
+        fetchData()
+    }
+
+    private func registerNotifications() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.keyboardWillShow(notification:)),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -55,19 +72,6 @@ final class ChatViewController: UIViewController {
                                                selector: #selector(self.keyboardWillHide(notification:)),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
-
-        tableView.register(MessageMineTableViewCell.self, forCellReuseIdentifier: ChatViewController.mineCellIdentifier)
-           tableView.register(MessageOtherTableViewCell.self, forCellReuseIdentifier: ChatViewController.otherCellIdentifier)
-        tableView.tableFooterView = UIView()
-
-        tableView.dataSource = self
-
-        setupNavigationItem()
-        addComponents()
-        layoutComponents()
-        setupLoadCompletion()
-
-        fetchData()
     }
 
     private func setupNavigationItem() {

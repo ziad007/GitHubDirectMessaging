@@ -1,5 +1,6 @@
 
 import Foundation
+import UIKit
 
 let SharedAPICall = APICall()
 typealias response = Result<Any?, NSError>
@@ -54,11 +55,15 @@ class APICall {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = API.akmethod.description
 
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+
             if error != nil {
                 if let httpResponse = response as? HTTPURLResponse {
                     let responseError = ErrorCodes(code: httpResponse.statusCode)
                     DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+
                         handler(Result.failure((responseError?.error)!))
                     }
                 }
@@ -69,7 +74,8 @@ class APICall {
             let json = try? JSONSerialization.jsonObject(with: data, options: [])
 
                 DispatchQueue.main.async {
-                        handler(Result.success(json))
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    handler(Result.success(json))
                     }
         }
         task.resume()
