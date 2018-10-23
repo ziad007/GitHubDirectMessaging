@@ -1,4 +1,7 @@
 
+
+Please note that author for many commits were configured with another email(Ziad@synkers.com) which is me. I fixed it by configuring the git to target the current email zbouismail@gmail.com in my last commits.
+ 
 # GitHub Direct Messaging app
 
 I have chosen the scenario B where I can design the main stucture of the application and define the architecture to organise code and make it testable so it can be maintainable by the team in the long run. 
