@@ -6,7 +6,7 @@ final class MessageMineTableViewCell: MessageTableViewCell {
     override func setupBubbleImageView() {
         bubbleImageView.image = UIImage(named: "right_bubble.png")!
             .resizableImage(withCapInsets:
-                UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 25),
+                UIEdgeInsets(top: 17, left: 21, bottom: 17, right: 21),
                             resizingMode: .stretch)
 
     }
