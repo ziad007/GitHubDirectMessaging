@@ -10,16 +10,6 @@ In this project I have implemented a scablable, maintanable and testable applica
 - ViewController
 
 
-```mermaid
-graph LR
-A[ViewController]  --> B((Interactor))
-B --> A
-B --> D{Service}
-D --> B
-D --> E[API/DataStore]
-E --> D
-```
-
 #### Advantages
 - Create unit testing for interactor, mocking service and the dataStore layer.
 - Faster development process
