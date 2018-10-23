@@ -86,10 +86,9 @@ final class ChatViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
             chatView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-            keyboardHC,
             chatView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             chatView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-
+            keyboardHC,
             ])
     }
 
