@@ -18,6 +18,11 @@ class ChatTextFieldView: UIView {
     @IBOutlet weak var messageTextView: UITextView!
     weak var delegate: ChatTextFieldViewDelegate?
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        messageTextView.layer.cornerRadius = messageTextView.frame.height / 2
+    }
+
     @IBAction private func didSelectSend(_ sender: AnyObject) {
         guard  messageTextView.text != "" else { return }
         guard let body = messageTextView.text else { return }

@@ -72,7 +72,6 @@ final class ChatViewController: UIViewController {
 
     private func setupNavigationItem() {
         navigationItem.title = user.login
-        navigationController?.navigationBar.barTintColor = UIColor.white
     }
 
     private func addComponents() {

@@ -6,7 +6,7 @@ final class MessageOtherTableViewCell: MessageTableViewCell {
     override func setupBubbleImageView() {
         bubbleImageView.image = UIImage(named: "left_bubble")!
             .resizableImage(withCapInsets:
-                UIEdgeInsets(top: 16, left: 18, bottom: 16, right: 18),
+                UIEdgeInsets(top: 16, left: 25, bottom: 16, right: 16),
                             resizingMode: .stretch)
 
     }
@@ -15,8 +15,8 @@ final class MessageOtherTableViewCell: MessageTableViewCell {
         NSLayoutConstraint.activate([
             textMessageLabel.topAnchor.constraint(equalTo: textView.topAnchor, constant: 16),
             textView.bottomAnchor.constraint(equalTo: textMessageLabel.bottomAnchor,constant: 16),
-            textView.trailingAnchor.constraint(equalTo: textMessageLabel.trailingAnchor, constant: 16),
-            textMessageLabel.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 16),
+            textView.trailingAnchor.constraint(equalTo: textMessageLabel.trailingAnchor, constant: 20),
+            textMessageLabel.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 20),
 
             bubbleImageView.widthAnchor.constraint(equalTo: textView.widthAnchor),
             bubbleImageView.heightAnchor.constraint(equalTo: textView.heightAnchor),

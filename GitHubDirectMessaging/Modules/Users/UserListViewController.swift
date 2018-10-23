@@ -55,7 +55,6 @@ final class UserListViewController: UIViewController {
 
     private func setupNavigationItem() {
         navigationItem.title = "GitHub DM"
-        navigationController?.navigationBar.barTintColor = UIColor.white
     }
 
     private func addComponents() {
